@@ -19,7 +19,7 @@ app.post("/user", (req, res, next) => {
     const user = jsonData.find((u) => u.email === req.body.email);
     console.log(user);
     if (!user) {
-      jsonData.push(req.body);
+      jsonData.push({ ...req.body, id: Date.now().toString() });
       fs.writeFile(
         path.resolve("./users.json"),
         JSON.stringify(jsonData),
